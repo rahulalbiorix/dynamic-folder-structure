@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <button @click="showInput = true">Add folder to root</button>
+  <div class="tree-view">
+    <button class="root-btn" @click="showInput = true">Add folder to root</button>
     <Folder :folder="rootFolders" @delete="deleteFileOrFolder" @add="addFileOrFolder" />
     <CreateInput v-if="showInput" type="folder" @add="addRootFolder" @close="showInput = false" />
   </div>
@@ -32,4 +32,12 @@ const addFileOrFolder = (item) => {
   filesStore.addfileOrFolder(rootFolders.value, item)
 }
 </script>
-<style scoped></style>
+<style scoped>
+.tree-view {
+  padding: 20px;
+}
+.root-btn {
+  height: 30px;
+  cursor: pointer;
+}
+</style>

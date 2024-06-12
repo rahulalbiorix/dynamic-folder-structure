@@ -15,25 +15,27 @@
         />
       </div>
       <li v-else>
-        <SvgIcon v-if="item.type === 'folder'" type="mdi" :path="mdiFolder" />
-        <SvgIcon v-if="item.type === 'file'" type="mdi" :path="mdiFile" />
-        <span @mouseover="hoverItem = item.id" @mouseleave="hoverItem = null"
-          >{{ item.value
-          }}<span v-if="hoverItem === item.id">
-            <SvgIcon
-              class="btn-icon"
-              v-if="item.type === 'folder'"
-              type="mdi"
-              :path="mdiPlusCircle"
-              @click="handleAdd(item)"
-            /><SvgIcon
-              @click="deleteFileOrFolder(item)"
-              class="btn-icon"
-              type="mdi"
-              :path="mdiMinusCircle"
-            />
-          </span>
-        </span>
+        <div>
+          <SvgIcon v-if="item.type === 'folder'" type="mdi" :path="mdiFolder" />
+          <SvgIcon v-if="item.type === 'file'" type="mdi" :path="mdiFile" />
+          <div @mouseover="hoverItem = item.id" @mouseleave="hoverItem = null">
+            {{ item.value
+            }}<span v-if="hoverItem === item.id">
+              <SvgIcon
+                class="btn-icon"
+                v-if="item.type === 'folder'"
+                type="mdi"
+                :path="mdiPlusCircle"
+                @click="handleAdd(item)"
+              /><SvgIcon
+                @click="deleteFileOrFolder(item)"
+                class="btn-icon"
+                type="mdi"
+                :path="mdiMinusCircle"
+              />
+            </span>
+          </div>
+        </div>
         <Folder
           v-if="item.type === 'folder' && item.childrens.length"
           :folder="item.childrens"
@@ -92,10 +94,11 @@ li::before {
   content: '';
   position: absolute;
   left: -16px;
-  top: -12px;
-  width: 1px;
+  top: -24px;
+  width: 2px;
   height: 100%;
   background-color: black;
+  z-index: -1;
 }
 li::after {
   content: '';
@@ -105,5 +108,9 @@ li::after {
   width: 20px;
   height: 1px;
   background-color: black;
+}
+li div {
+  display: flex;
+  height: 40px;
 }
 </style>
